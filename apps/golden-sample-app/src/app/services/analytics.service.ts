@@ -16,7 +16,7 @@ send all your tracker events to the analytics system (eg: google analytics/segme
  */
 @Injectable()
 export class AnalyticsService extends TrackerHandler {
-    private tracer = openTelemetry.trace.getTracer('backbase-tracker-handler');
+    private tracer = openTelemetry.trace.getTracer('@backbase/observability');
 
     register(): void {
         this.tracker.subscribeAll((event) => {
