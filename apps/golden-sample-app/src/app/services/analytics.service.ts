@@ -45,7 +45,7 @@ export class AnalyticsService extends TrackerHandler {
             attributes['height'] = payload['height'];
         } else if (event instanceof UserActionTrackerEvent) {
             attributes['event-type'] = 'user-action';
-            attributes = payload;
+            attributes = attributes.merge(payload);
         }
         console.log('Adding attributes to Active Span', activeSpan,  attributes);
         activeSpan.setAttributes(attributes);
