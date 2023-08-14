@@ -24,7 +24,7 @@ export const environment: Environment = {
   common: {
     designSlimMode: false,
   },
-  isTelemetryTracerEnabled: false,
+  isTelemetryTracerEnabled: true,
   bbApiKey: '27d4d4ee-afc1-4190-adc4-b9d30d39badb',
   telemetryCollectorURL: 'https://botel.bartbase.com/v1/traces',
 };

@@ -34,9 +34,8 @@ export function instrumentOpenTelemetry(
 
   const resource = Resource.default().merge(
     new Resource({
-      [SemanticResourceAttributes.SERVICE_NAME]: 'BB collector',
-      appName: opentelemetryConfig.appName,
-      appVersion: opentelemetryConfig.appVersion,
+      [SemanticResourceAttributes.SERVICE_NAME]: opentelemetryConfig.appName,
+      [SemanticResourceAttributes.SERVICE_VERSION]: opentelemetryConfig.appVersion,
     })
   );
 
