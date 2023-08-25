@@ -129,6 +129,7 @@ function initializeOtel(): Promise<void> {
           useFactory:
             (oAuthService: OAuthService, cookieService: CookieService) =>
             async () => {
+              await initializeOtel();
               // Remove this if auth cookie is not needed for the app
               oAuthService.events.subscribe(({ type }) => {
                 if (type === 'token_received' || type === 'token_refreshed') {
@@ -176,11 +177,6 @@ function initializeOtel(): Promise<void> {
     {
       provide: ErrorHandler,
       useClass: AppErrorHandler,
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: () => initializeOtel,
-      multi: true,
     },
   ],
   bootstrap: [AppComponent],
