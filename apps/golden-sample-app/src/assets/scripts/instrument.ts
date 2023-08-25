@@ -1,7 +1,7 @@
 import { registerInstrumentations } from '@opentelemetry/instrumentation';
 import {
   WebTracerProvider,
-  ConsoleSpanExporter,
+  // ConsoleSpanExporter,
   SimpleSpanProcessor,
   BatchSpanProcessor,
   TraceIdRatioBasedSampler,
@@ -12,8 +12,16 @@ import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
 import { ZoneContextManager } from '@opentelemetry/context-zone';
 import { Resource } from '@opentelemetry/resources';
 import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions';
+import sha256 from 'crypto-js/sha256';
 
 type Environments = 'prd' | 'stg' | 'dev' | 'local' | 'mock' | string;
+
+interface Item {
+  value: string;
+  expiry: number | null;
+}
+
+const OtelSessionIdKey = 'otel_token';
 
 export interface OpenTelemetryConfig {
   apiKey: string;
@@ -38,6 +46,7 @@ export function instrumentOpenTelemetry(
       [SemanticResourceAttributes.SERVICE_NAME]: opentelemetryConfig.appName,
       [SemanticResourceAttributes.SERVICE_VERSION]:
         opentelemetryConfig.appVersion,
+      sessionId: generateSessionId(),
     })
   );
 
@@ -51,7 +60,7 @@ export function instrumentOpenTelemetry(
     : SimpleSpanProcessor;
 
   // For demo purposes only, immediately log traces to the console
-  provider.addSpanProcessor(new SpanProcessor(new ConsoleSpanExporter()));
+  // provider.addSpanProcessor(new SpanProcessor(new ConsoleSpanExporter()));
 
   // Batch traces before sending them to backend server
   provider.addSpanProcessor(
@@ -85,4 +94,46 @@ export function instrumentOpenTelemetry(
       }),
     ],
   });
+}
+
+function generateSessionId(): string {
+  const milliseconds = 60000;
+  const sessionId =
+    localStorage.getItem('id_token') || setLocalStorageItem(12 * milliseconds); // 12 minutes
+
+  return sha256(sessionId as string).toString();
+}
+
+function setLocalStorageItem(ttl: number) {
+  const token = localStorage.getItem(OtelSessionIdKey);
+
+  if (token && !isTheTokenExpired(token)) {
+    return JSON.parse(token)?.value;
+  }
+
+  const item: Item = {
+    value: Math.random().toString(36).substring(2),
+    expiry: Date.now() + ttl,
+  };
+
+  console.log('expiry time for the token:', new Date(item.expiry as number));
+
+  localStorage.setItem(OtelSessionIdKey, JSON.stringify(item));
+
+  return item.value;
+}
+
+function isTheTokenExpired(token: string | null) {
+  // if the item doesn't exist, return null
+  if (!token) return true;
+
+  const parseItem = JSON.parse(token) as Item;
+
+  // compare the expiry time of the item with the current time
+  if (parseItem?.expiry && Date.now() > parseItem.expiry) {
+    // If the item is expired, delete the item from storage and return null
+    localStorage.removeItem(OtelSessionIdKey);
+    return true;
+  }
+  return false;
 }
