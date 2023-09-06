@@ -1,0 +1,16 @@
+{
+  "request": {
+    "url": "/api/access-control/client-api/v3/accessgroups/user-context",
+    "method": "POST"
+  },
+  "response": {
+    "jsonBody": {
+      "status": "204",
+      "default": true,
+      "data": { "serviceAgreementId": "12345ed2abc2134" }
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

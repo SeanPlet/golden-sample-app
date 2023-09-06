@@ -1,0 +1,19 @@
+{
+  "request": {
+    "url": "/api/payment-order-service/client-api/v3/payment-orders",
+    "method": "POST"
+  },
+  "response": {
+    "jsonBody": {
+      "status": 201,
+      "default": true,
+      "data": {
+        "id": "qwe123-asd3a-34456-asdsd-2344ertf5",
+        "status": "ENTERED"
+      }
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

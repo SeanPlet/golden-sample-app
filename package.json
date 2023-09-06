@@ -15,6 +15,7 @@
     "build:docker": "docker build -t golden-sample-app:latest .",
     "build:start:docker": "rm -rf ./dist && npm run build && npm run start:docker",
     "mock-server": "node ./mock-server/mock-server.js -- golden-sample-app",
+    "wiremock-server:docker": "docker-compose -f ./wiremock-server/mock-server.yaml up --build",
     "affected:build": "nx affected:build --configuration=production",
     "affected:lint": "nx affected:lint",
     "affected:test": "nx affected:test",

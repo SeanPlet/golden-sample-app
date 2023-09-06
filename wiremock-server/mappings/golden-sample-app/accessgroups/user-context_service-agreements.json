@@ -1,0 +1,30 @@
+{
+  "request": {
+    "url": "/api/access-control/client-api/v3/accessgroups/user-context/service-agreements",
+    "method": "GET"
+  },
+  "response": {
+    "jsonBody": {
+      "status": "200",
+      "default": true,
+      "data": [
+        {
+          "additions": {},
+          "id": "12345ed2abc2134",
+          "externalId": "sa_sdbxaz-ankit",
+          "name": "Ankit",
+          "description": "Master Service Agreement for Ankit",
+          "isMaster": true,
+          "validFromDate": null,
+          "validFromTime": null,
+          "validUntilDate": null,
+          "validUntilTime": null,
+          "customerCategory": null
+        }
+      ]
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "request": {
+    "url": "/api/arrangement-manager/client-api/v2/balances/aggregations",
+    "method": "GET"
+  },
+  "response": {
+    "jsonBody": {
+      "status": "200",
+      "default": true,
+      "data": [
+        {
+          "numberOfArrangements": 1,
+          "aggregatedBalances": [
+            {
+              "amount": "9693.2500000000",
+              "currencyCode": "USD",
+              "numberOfArrangements": 1
+            }
+          ]
+        }
+      ]
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

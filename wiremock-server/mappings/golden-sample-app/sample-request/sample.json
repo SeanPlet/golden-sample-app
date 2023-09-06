@@ -1,0 +1,16 @@
+{
+  "request": {
+    "url": "/api/sample-request/sample",
+    "method": "GET"
+  },
+  "response": {
+    "jsonBody": {
+      "status": 200,
+      "default": true,
+      "data": {}
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
