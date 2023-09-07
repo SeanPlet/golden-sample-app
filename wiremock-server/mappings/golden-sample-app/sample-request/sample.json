@@ -1,6 +1,6 @@
 {
   "request": {
-    "url": "/api/sample-request/sample",
+    "url": "/sample-request/sample",
     "method": "GET"
   },
   "response": {

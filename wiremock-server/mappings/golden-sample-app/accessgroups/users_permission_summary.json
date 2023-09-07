@@ -1,11 +1,9 @@
 {
   "request": {
-    "urlPattern": "/api/access-control/client-api/v3/accessgroups/users/permissions/summary",
+    "urlPattern": "/access-control/client-api/v3/accessgroups/users/permissions/summary.*",
     "method": "GET"
   },
   "response": {
-    "proxyBaseUrl": "http://localhost:4200/api",
-    "proxyUrlPrefixToRemove": "/api/access-control/",
     "jsonBody": {
       "status": "200",
       "default": true,

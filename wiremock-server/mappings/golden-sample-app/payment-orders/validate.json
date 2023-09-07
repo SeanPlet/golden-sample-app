@@ -1,7 +1,7 @@
 {
   "name": "payment-orders/validate",
   "request": {
-    "url": "/api/payment-order-service/client-api/v3/payment-orders/validate",
+    "urlPattern": "/payment-order-service/client-api/v3/payment-orders/validate.*",
     "method": "POST"
   },
   "response": {

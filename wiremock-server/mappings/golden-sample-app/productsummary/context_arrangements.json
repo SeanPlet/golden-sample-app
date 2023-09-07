@@ -1,7 +1,7 @@
 {
   "name": "context/arrangements",
   "request": {
-    "url": "/api/arrangement-manager/client-api/v2/productsummary/context/arrangements",
+    "urlPattern": "/arrangement-manager/client-api/v2/productsummary/context/arrangements.*",
     "method": "GET"
   },
   "response": {

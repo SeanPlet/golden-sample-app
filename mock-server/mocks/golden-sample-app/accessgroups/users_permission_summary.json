@@ -1,5 +1,5 @@
 {
-  "name": "accessgroups/users/permissions/summary",
+  "name": "/accessgroups/users/permissions/summary",
   "request": {
     "url": "/access-control/client-api/v3/accessgroups/users/permissions/summary",
     "method": "GET"

@@ -1,7 +1,7 @@
 {
   "name": "user-context/service-agreements",
   "request": {
-    "url": "/api/access-control/client-api/v3/accessgroups/user-context/service-agreements",
+    "url": "/access-control/client-api/v3/accessgroups/user-context/service-agreements",
     "method": "GET"
   },
   "responses": {

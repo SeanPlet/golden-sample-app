@@ -1,6 +1,6 @@
 {
   "request": {
-    "url": "/api/transaction-manager/client-api/v2/transactions",
+    "url": "/transaction-manager/client-api/v2/transactions",
     "method": "POST"
   },
   "response": {

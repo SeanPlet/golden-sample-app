@@ -1,6 +1,6 @@
 {
   "request": {
-    "url": "/api/access-control/client-api/v2/accessgroups/serviceagreements/context",
+    "urlPattern": "/access-control/client-api/v2/accessgroups/serviceagreements/context.*",
     "method": "GET"
   },
   "response": {

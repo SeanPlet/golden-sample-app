@@ -1,5 +1,9 @@
 {
-  "context": "/api",
-  "target": "http://localhost:9999",
-  "secure": false
+  "/api": {
+    "target": "http://127.0.0.1:9999/",
+    "pathRewrite": { "^/api": "" },
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
 }

@@ -1,6 +1,6 @@
 {
   "request": {
-    "url": "/api/arrangement-manager/client-api/v2/balances/aggregations",
+    "urlPattern": "/arrangement-manager/client-api/v2/balances/aggregations.*",
     "method": "GET"
   },
   "response": {

@@ -10,6 +10,11 @@ console.log(`Starting the mocks server for ${appName}`);
 
 app.set('port', 9999); // setting the mock server port to 9999
 
+const mockOptions = {
+  mocks: `${appName}/**/*.json`, // Pattern of the mock files
+  presets: '**/*preset.json',
+};
+
 /**
  * For detailed explanation please visit
  * https://ngapimock.org/docs/installation#processor
@@ -17,8 +22,12 @@ app.set('port', 9999); // setting the mock server port to 9999
 apiMock.processor.process({
   src: 'mock-server/mocks', // Place where to find the mocks
   patterns: {
-    mocks: `${appName}/**/*.json`, // Pattern of the mock files
-    presets: '**/*preset.json',
+    mocks: mockOptions.mocks, // Pattern of the mock files
+    presets: mockOptions.presets,
+  },
+  watches: {
+    mocks: mockOptions.mocks, // Pattern of the mock files
+    presets: mockOptions.presets,
   },
   watch: true,
 });

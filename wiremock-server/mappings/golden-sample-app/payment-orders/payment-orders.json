@@ -1,6 +1,6 @@
 {
   "request": {
-    "url": "/api/payment-order-service/client-api/v3/payment-orders",
+    "urlPattern": "/payment-order-service/client-api/v3/payment-orders.*",
     "method": "POST"
   },
   "response": {

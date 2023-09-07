@@ -1,6 +1,6 @@
 {
   "request": {
-    "url": "/api/arrangement-manager/client-api/v2/arrangements/jb007-007-1010a-nkit12",
+    "urlPattern": "/arrangement-manager/client-api/v2/arrangements/jb007-007-1010a-nkit12.*",
     "method": "GET"
   },
   "response": {
