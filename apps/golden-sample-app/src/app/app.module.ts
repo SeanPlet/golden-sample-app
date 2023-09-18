@@ -49,20 +49,15 @@ import { ActivityMonitorModule } from './auth/activity-monitor';
 import { instrumentOpenTelemetry } from '../assets/scripts/instrument';
 import packageInfo from 'package-json';
 
-function initializeOtel(): Promise<void> {
-  return new Promise((resolve) => {
-    instrumentOpenTelemetry({
-      appName: packageInfo.name,
-      appVersion: packageInfo.version,
-      apiKey: environment.bbApiKey || '',
-      env: 'local',
-      isProduction: true,
-      isEnabled: environment.isTelemetryTracerEnabled || false,
-      url: environment.telemetryCollectorURL || '',
-    });
-    resolve();
-  });
-}
+instrumentOpenTelemetry({
+  appName: packageInfo.name,
+  appVersion: packageInfo.version,
+  apiKey: environment.bbApiKey || '',
+  env: 'local',
+  isProduction: true,
+  isEnabled: environment.isTelemetryTracerEnabled || false,
+  url: environment.telemetryCollectorURL || '',
+});
 
 @NgModule({
   declarations: [AppComponent],
@@ -129,7 +124,6 @@ function initializeOtel(): Promise<void> {
           useFactory:
             (oAuthService: OAuthService, cookieService: CookieService) =>
             async () => {
-              await initializeOtel();
               // Remove this if auth cookie is not needed for the app
               oAuthService.events.subscribe(({ type }) => {
                 if (type === 'token_received' || type === 'token_refreshed') {

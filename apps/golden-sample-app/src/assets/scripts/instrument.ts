@@ -12,7 +12,7 @@ import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
 import { ZoneContextManager } from '@opentelemetry/context-zone';
 import { Resource } from '@opentelemetry/resources';
 import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions';
-import sha256 from 'crypto-js/sha256';
+import * as sha256 from 'crypto-js/sha256';
 
 type Environments = 'prd' | 'stg' | 'dev' | 'local' | 'mock' | string;
 
@@ -98,10 +98,14 @@ export function instrumentOpenTelemetry(
 
 function generateSessionId(): string {
   const milliseconds = 60000;
-  const sessionId =
-    localStorage.getItem('id_token') || setLocalStorageItem(12 * milliseconds); // 12 minutes
 
-  return sha256(sessionId as string).toString();
+  const isIdToken = localStorage.getItem('id_token');
+
+  if (isIdToken) {
+    return sha256(isIdToken).toString();
+  }
+
+  return setLocalStorageItem(12 * milliseconds); // 12 minutes
 }
 
 function setLocalStorageItem(ttl: number) {
@@ -111,10 +115,16 @@ function setLocalStorageItem(ttl: number) {
     return JSON.parse(token)?.value;
   }
 
+  const randomValue = crypto
+    .getRandomValues(new Uint32Array(1))[0]
+    .toString(36);
+
   const item: Item = {
-    value: Math.random().toString(36).substring(2),
+    value: sha256(randomValue as string).toString(),
     expiry: Date.now() + ttl,
   };
+
+  console.log('generated token:', item.value);
 
   console.log('expiry time for the token:', new Date(item.expiry as number));
 
