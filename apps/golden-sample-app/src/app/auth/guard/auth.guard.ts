@@ -27,7 +27,7 @@ export class AuthGuard {
    * If not, treat them as logged out.
    */
   private redirectIfUnauthenticated(): Observable<boolean | UrlTree> {
-    if (environment.mockEnabled) return of(true);
+    // if (environment.mockEnabled) return of(true);
 
     return this.authService.isAuthenticated$.pipe(
       map((loggedIn) => {

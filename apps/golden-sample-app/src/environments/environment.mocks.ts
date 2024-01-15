@@ -28,6 +28,19 @@ export const environment: Environment = {
 };
 
 export const authConfig: AuthConfig = {
+  issuer:
+    'https://identity.prd.sdbxaz.azure.backbaseservices.com/auth/realms/customer',
+  // URL of the SPA to redirect the user to after login
+  redirectUri: document.baseURI,
+  // The SPA's id. The SPA is registered with this id at the auth-server
+  clientId: 'bb-web-client',
+  responseType: 'code',
+
+  // set the scope for the permissions the client should request
+  // The first four are defined by OIDC.
+  // Important: Request offline_access to get a refresh token
+  scope: 'openid',
+
   requireHttps: false,
   showDebugInformation: true,
   logoutUrl: document.baseURI + 'logout',

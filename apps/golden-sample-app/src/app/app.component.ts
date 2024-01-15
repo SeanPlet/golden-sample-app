@@ -22,8 +22,9 @@ export class AppComponent {
     public layoutService: LayoutService,
     @Optional() private readonly tracker?: Tracker
   ) {
-    this.isAuthenticated =
-      environment.mockEnabled ?? oAuthService.hasValidAccessToken();
+    // this.isAuthenticated =
+    //   environment.mockEnabled ?? oAuthService.hasValidAccessToken();
+    this.isAuthenticated = oAuthService.hasValidAccessToken();
   }
 
   logout(): void {
