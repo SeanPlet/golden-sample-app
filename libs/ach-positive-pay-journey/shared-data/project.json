@@ -11,7 +11,8 @@
         "{workspaceRoot}/dist/libs/ach-positive-pay-journey/shared-data"
       ],
       "options": {
-        "project": "libs/ach-positive-pay-journey/shared-data/ng-package.json"
+        "project": "libs/ach-positive-pay-journey/shared-data/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": true
       },
       "configurations": {
         "production": {
@@ -34,7 +35,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": [
           "libs/ach-positive-pay-journey/shared-data/**/*.ts",

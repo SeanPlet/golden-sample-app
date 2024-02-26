@@ -5,12 +5,14 @@
   "sourceRoot": "libs/transactions-journey/feature-transaction-view/src",
   "prefix": "backbase",
   "targets": {
-
     "build": {
       "executor": "@nx/angular:package",
-      "outputs": ["{workspaceRoot}/dist/libs/transactions-journey/feature-transaction-view"],
+      "outputs": [
+        "{workspaceRoot}/dist/libs/transactions-journey/feature-transaction-view"
+      ],
       "options": {
-        "project": "libs/transactions-journey/feature-transaction-view/ng-package.json"
+        "project": "libs/transactions-journey/feature-transaction-view/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": true
       },
       "configurations": {
         "production": {
@@ -24,14 +26,16 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/libs/transactions-journey/feature-transaction-view"],
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/transactions-journey/feature-transaction-view"
+      ],
       "options": {
         "jestConfig": "libs/transactions-journey/feature-transaction-view/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": [
           "libs/transactions-journey/feature-transaction-view/**/*.ts",

@@ -11,7 +11,8 @@
         "{workspaceRoot}/dist/libs/ach-positive-pay-journey/data-access"
       ],
       "options": {
-        "project": "libs/ach-positive-pay-journey/data-access/ng-package.json"
+        "project": "libs/ach-positive-pay-journey/data-access/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": true
       },
       "configurations": {
         "production": {
@@ -34,7 +35,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": [
           "libs/ach-positive-pay-journey/data-access/**/*.ts",

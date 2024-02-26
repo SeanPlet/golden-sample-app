@@ -9,7 +9,8 @@
       "executor": "@nx/angular:package",
       "outputs": ["{workspaceRoot}/dist/libs/transfer-journey/data-access"],
       "options": {
-        "project": "libs/transfer-journey/data-access/ng-package.json"
+        "project": "libs/transfer-journey/data-access/ng-package.json",
+        "updateBuildableProjectDepsInPackageJson": true
       },
       "configurations": {
         "production": {
@@ -30,7 +31,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": [
           "libs/transfer-journey/data-access/**/*.ts",
