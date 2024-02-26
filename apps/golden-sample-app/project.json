@@ -103,16 +103,16 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "development": {
-          "browserTarget": "golden-sample-app:build:development"
+          "buildTarget": "golden-sample-app:build:development"
         },
         "production": {
-          "browserTarget": "golden-sample-app:build:production"
+          "buildTarget": "golden-sample-app:build:production"
         },
         "nl": {
-          "browserTarget": "golden-sample-app:build:nl"
+          "buildTarget": "golden-sample-app:build:nl"
         },
         "mocks": {
-          "browserTarget": "golden-sample-app:build:mocks",
+          "buildTarget": "golden-sample-app:build:mocks",
           "proxyConfig": "./apps/golden-sample-app/proxy.mocks.conf.json"
         }
       },
@@ -132,7 +132,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "golden-sample-app:build"
+        "buildTarget": "golden-sample-app:build"
       }
     },
     "lint": {
