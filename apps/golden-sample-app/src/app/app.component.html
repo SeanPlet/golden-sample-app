@@ -47,7 +47,9 @@
 
     <!-- Navigation Items-->
     <ul *ngIf="isAuthenticated" class="bb-layout__horizontal-nav">
-      <li class="bb-layout__horizontal-nav-item">
+      <li 
+      *ngIf="isFeature1Enabled"
+      class="bb-layout__horizontal-nav-item">
         <a
           class="bb-layout__horizontal-nav-link"
           routerLink="/transfer"

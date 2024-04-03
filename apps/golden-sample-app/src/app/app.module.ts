@@ -46,11 +46,15 @@ import { LocaleSelectorModule } from './locale-selector/locale-selector.module';
 import { TrackerModule } from '@backbase/foundation-ang/observability';
 import { UserContextInterceptor } from './user-context/user-context.interceptor';
 import { ActivityMonitorModule } from './auth/activity-monitor';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireRemoteConfigModule, DEFAULTS, SETTINGS, AngularFireRemoteConfig } from '@angular/fire/compat/remote-config';
 import packageInfo from 'package-json';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireRemoteConfigModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -73,20 +77,24 @@ import packageInfo from 'package-json';
     TransactionSigningModule,
     TrackerModule.forRoot({
       handler: AnalyticsService,
-      openTelemetryConfig: {
-        appName: packageInfo.name,
-        appVersion: packageInfo.version,
-        apiKey: environment.bbApiKey,
-        env: 'local',
-        isProduction: environment.production,
-        isEnabled: environment.isTelemetryTracerEnabled,
-        url: environment.telemetryCollectorURL,
-      },
+      // openTelemetryConfig: {
+      //   appName: packageInfo.name,
+      //   appVersion: packageInfo.version,
+      //   apiKey: environment.bbApiKey,
+      //   env: 'local',
+      //   isProduction: environment.production,
+      //   isEnabled: environment.isTelemetryTracerEnabled,
+      //   url: environment.telemetryCollectorURL,
+      // },
     }),
     ActivityMonitorModule,
   ],
   providers: [
     ...(environment.mockProviders || []),
+    { provide: DEFAULTS, useValue: { enableAwesome: true } },
+    {
+      provide: SETTINGS, useValue: { minimumFetchIntervalMillis: 1_000 }
+    },
     { provide: AuthConfig, useValue: authConfig },
     {
       provide: HTTP_INTERCEPTORS,
@@ -137,6 +145,10 @@ import packageInfo from 'package-json';
             },
         },
     {
+      provide: ErrorHandler,
+      useClass: AppErrorHandler,
+    },
+    {
       provide: TRANSACTIONS_BASE_PATH,
       useValue: environment.apiRoot + '/transaction-manager',
     },
@@ -166,11 +178,15 @@ import packageInfo from 'package-json';
         accessControlBasePath: `${environment.apiRoot}/access-control`,
       },
     },
-    {
-      provide: ErrorHandler,
-      useClass: AppErrorHandler,
-    },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private remoteConfig: AngularFireRemoteConfig) {
+    this.remoteConfig.fetchAndActivate().then(() => {
+      const value = this.remoteConfig.getValue('Feature_1');
+    }).catch(error => {
+      console.error('Error fetching remote config:', error);
+    });
+  }
+}

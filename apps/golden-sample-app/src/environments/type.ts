@@ -1,4 +1,5 @@
 import { Provider } from '@angular/core';
+import { FirebaseOptions } from 'firebase/app';
 
 export interface sharedJourneyConfiguration {
   designSlimMode: boolean;
@@ -15,4 +16,5 @@ export interface Environment {
   bbApiKey?: string;
   telemetryCollectorURL?: string;
   env?: string;
+  firebase: FirebaseOptions;
 }
